@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Metolib from '@fmidev/metolib';
 import './App.css';
-import {Map, Marker, TileLayer} from "react-leaflet";
+import { Map, Marker, TileLayer } from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from './Sidebar';
@@ -50,7 +50,7 @@ function App() {
           setObservationLocations(data.locations
             .map(loc => {
               const [lat, lon] = loc.info.position.map(parseFloat);
-              return {...loc, position: {lat, lon}}
+              return { ...loc, position: { lat, lon } }
             })
           );
 
@@ -70,14 +70,14 @@ function App() {
         maxZoom={19}
       />
       {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
-                                               key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
+        key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
       </Marker>)}
     </MapContainer>
   );
 
   return (
     <div className="App">
-      <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations}/>
+      <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations} />
       {map}
     </div>
   );

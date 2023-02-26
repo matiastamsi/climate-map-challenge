@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import GetSelectedLocatoinId from './locationGetter';
 
-function Sidebar({selectedLocationId, observationLocations}) {
+function Sidebar({ selectedLocationId, observationLocations }) {
     const id = GetSelectedLocatoinId(selectedLocationId);
 
     const loc = observationLocations.find(loc => loc.info.id === id);
