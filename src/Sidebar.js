@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import getSelectedLocatoinId from './locationGetter';
+import GetSelectedLocatoinId from './locationGetter';
 
 function Sidebar({selectedLocationId, observationLocations}) {
-    const id = getSelectedLocatoinId(selectedLocationId);
+    const id = GetSelectedLocatoinId(selectedLocationId);
 
     const loc = observationLocations.find(loc => loc.info.id === id);
     return <div>
