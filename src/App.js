@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Metolib from '@fmidev/metolib';
-import './App.css';
 import { Map, Marker, TileLayer } from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
