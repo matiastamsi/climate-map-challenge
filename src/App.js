@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Metolib from '@fmidev/metolib';
-import { Map, Marker, TileLayer } from "react-leaflet";
-import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from './Sidebar';
-
-const MapContainer = styled(Map)`
-    width: calc(100vw - 300px);
-    height: 100vh;
-    position:absolute;
-    top:0px;
-    left:300px;
-`;
-
+import MapContainer from './MapContainer';
 
 // Ugly hack to fix Leaflet icons with leaflet loaders
 delete L.Icon.Default.prototype._getIconUrl;
@@ -21,7 +11,6 @@ L.Icon.Default.mergeOptions({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
-
 
 function App() {
   const [observationLocations, setObservationLocations] = useState([]);
@@ -59,25 +48,18 @@ function App() {
     }
   }, []);
 
-  const position = [65, 26];
-  const map = (
-    <MapContainer center={position} zoom={6}>
-      <TileLayer
-        url='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-        attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        subdomains='abcd'
-        maxZoom={19}
-      />
-      {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
-        key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
-      </Marker>)}
-    </MapContainer>
-  );
-
   return (
     <div className="App">
-      <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations} />
-      {map}
+      <Sidebar
+        selectedLocationId={selectedLocation}
+        observationLocations={observationLocations}
+      />
+      <MapContainer
+        center={[65, 26]}
+        zoom={6}
+        observationLocations={observationLocations}
+        setSelectedLocation={setSelectedLocation}
+      />
     </div>
   );
 
